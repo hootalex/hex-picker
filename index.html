@@ -36,7 +36,11 @@ body {
       display: none;
             }
 
-
+button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
 
     </style>
 
@@ -637,8 +641,47 @@ body {
     <label>Third Layer</label>
   </div>
 
+
+  <button type="button" onClick="randomColors();"">Randomize All</button>
+
+
 <script   src="https://code.jquery.com/jquery-3.7.1.min.js"   integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="   crossorigin="anonymous"></script>
   <script>
+
+    var classes = ["bj-1", "bj-2", "bj-3", "bj-4", "bo-1", "bo-2", "bo-3", "bo-4", "nu-1", "nu-2", "nu-3", "nu-4", "cw-1", "cw-2", "cw-3", "cw-4"];
+
+
+function randomColors() {
+
+const randomColor = (() => {
+  "use strict";
+
+  const randomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  return () => {
+    var h = randomInt(0, 360);
+    var s = randomInt(42, 50);
+    var l = randomInt(40, 95);
+    return `hsl(${h},${s}%,${l}%)`;
+  };
+})();
+
+
+$(classes).each(function(index){
+
+  var appliedcolor = randomColor();
+
+  $( "." + this ).css( "fill", appliedcolor );
+  $( "input[data-class='" + classes[index] + "']" ).val( appliedcolor );
+  console.log(index);
+});
+
+}
+
+// randomColors();
+
 var hexclass = "hi";
 var color = "hi";
 
